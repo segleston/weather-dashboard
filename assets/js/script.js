@@ -5,8 +5,8 @@ const search = $('#search-button')
 
 
 let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${apiKey}`
-    
-    fetch(queryURL)
+
+fetch(queryURL)
     .then(function (response) {
         return response.json()
     })
@@ -14,15 +14,20 @@ let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5
         console.log(`geo data: ${data}`);
         let latitude = data[0].lat
         let longitude = data[0].lon
-        let forecastURl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}`
+        let forecastURl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
+        const h3El = $('#card-title').text(data[0].name)
         fetch(forecastURl)
-        .then(function (response) {
-            return response.json()
-        })
-        .then(function (data) {
-            console.log(data);
-           
-        })
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (data) {
+                console.log(data);
+                const currentWeather = data.list[0]
+                const tempEl = $('#temp').text(`Temp : ${currentWeather.main.temp} °C`)
+                const windEl = $('#wind').text(`Wind : ${currentWeather.wind.speed}`)
+                const humidityEl = $('#humidity').text(`Humidity : ${currentWeather.main.humidity}`)
+
+            })
     })
 
 // function fetchWeather(search) {
@@ -60,31 +65,31 @@ function displayCurrentWeather(date) {
 
 }
 
-function displayForecast(data) {
-    forecastSection.empty()
-    let forecastHeader = $('<h4>').text('5 day Forecast')
-    forecastSection.append(forecastHeader)
+// function displayForecast(data) {
+//     forecastSection.empty()
+//     let forecastHeader = $('<h4>').text('5 day Forecast')
+//     forecastSection.append(forecastHeader)
 
-    function checkNoon(forecast) {
-        return forecast.dt.txt.includes('12:00:00')
-    }
+//     function checkNoon(forecast) {
+//         return forecast.dt.txt.includes('12:00:00')
+//     }
 
-    let futureForecast = data.list.filter(checkNoon)
-    console.log(futureForecast)
+//     let futureForecast = data.list.filter(checkNoon)
+//     console.log(futureForecast)
 
-    for (let i = 0; i < futureForecast.length; i++) {
-        let day = futureForecast[i];
-        let forecastCard = $('<div>')
-        forecastCard.attr('class', 'card col-md')
-        let forecastCardBody = $('<div>')
-        forecastCardBody.attr('class', 'card-body')
-        let forecastTitle = $('<h5>')
-        forecastCardBody.attr('class', 'card-title')
-        forecastTitle.text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
-        let forecastTemp = $('<p>').text(`Temp: ${day.main.temp}C`)
-        forecastCardBody.attr('class', 'card-body')
-    }
-}
+//     for (let i = 0; i < futureForecast.length; i++) {
+//         let day = futureForecast[i];
+//         let forecastCard = $('<div>')
+//         forecastCard.attr('class', 'card col-md')
+//         let forecastCardBody = $('<div>')
+//         forecastCardBody.attr('class', 'card-body')
+//         let forecastTitle = $('<h5>')
+//         forecastCardBody.attr('class', 'card-title')
+//         forecastTitle.text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
+//         let forecastTemp = $('<p>').text(`Temp: ${day.main.temp}C`)
+//         forecastCardBody.attr('class', 'card-body')
+//     }
+// }
 
 
 function searchHistory() {
@@ -99,11 +104,11 @@ function searchHistory() {
         const pastSearch = searches[i];
         let searchHistoryBtn = $('<button>').text(pastSearch)
         searchHistoryBtn.addClass('search-history-btn')
-        searchHistory.append(searchHistoryBtn)  
+        searchHistory.append(searchHistoryBtn)
     }
 }
 
-$(document).on('click', '.search-history-btn', function() {
+$(document).on('click', '.search-history-btn', function () {
     let searchCity = $('.search-history-btn').val()
     console.log(searchCity)
 })
