@@ -3,34 +3,53 @@ const apiKey = 'aa1cf3cf32bb67cd868cafdf3e2b7b1a'
 // const currentDayUrl = `https://api.openweathermap.org/data/2.5/weather?q=${search}&limit=5&appid=${key}`
 const search = $('#search-button')
 
+function fetchWeather(search) {
+    let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${apiKey}`
 
-let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${apiKey}`
+    fetch(queryURL)
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(`geo data: ${data}`);
+            let latitude = data[0].lat
+            let longitude = data[0].lon
+            let forecastURl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
+            const h3El = $('#card-title').text(`Name: ${data[0].name} (${dayjs().format('MMMM D, YYYY')})`)
+            fetch(forecastURl)
+                .then(function (response) {
+                    return response.json()
+                })
+                .then(function (data) {
+                    console.log(data);
+                    // const currentWeather = data.list[0]
+                    displayCurrentWeather(data.list[0])
+                })
+        })
+}
 
-fetch(queryURL)
-    .then(function (response) {
-        return response.json()
-    })
-    .then(function (data) {
-        console.log(`geo data: ${data}`);
-        let latitude = data[0].lat
-        let longitude = data[0].lon
-        let forecastURl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
-        const h3El = $('#card-title').text(data[0].name)
-        fetch(forecastURl)
-            .then(function (response) {
-                return response.json()
-            })
-            .then(function (data) {
-                console.log(data);
-                const currentWeather = data.list[0]
-                const tempEl = $('#temp').text(`Temp : ${currentWeather.main.temp} °C`)
-                const windEl = $('#wind').text(`Wind : ${currentWeather.wind.speed}`)
-                const humidityEl = $('#humidity').text(`Humidity : ${currentWeather.main.humidity}`)
+function displayCurrentWeather(currentWeather) {
+    const iconURL = `https://openweathermap.org${currentWeather.weather.icon}.png` //ICON
+    const icon = $('icon').attr('src', iconURL)
+    const tempEl = $('#temp').text(`Temp : ${currentWeather.main.temp} °C`)
+    const windEl = $('#wind').text(`Wind : ${currentWeather.wind.speed}`)
+    const humidityEl = $('#humidity').text(`Humidity : ${currentWeather.main.humidity}`)
+}
 
-            })
-    })
+// $(document).on('click', '.search-history-btn', function () {
+//     let searchCity = $('.search-history-btn').val()
+//     console.log(searchCity)
+// })
 
-// function fetchWeather(search) {
+$('#search-button').on('click', function (e) {
+    e.preventDefault()
+    const search = $('#search-input').val().trim()
+    $('#today').attr('class', 'mt-3')
+    fetchWeather(search)
+    // searchHistory()
+})
+
+
 //     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${search}&limit=5&appid=aa1cf3cf32bb67cd868cafdf3e2b7b1a`
 //     fetch(queryURL)
 //         .then(function (response) {
@@ -108,16 +127,5 @@ function searchHistory() {
     }
 }
 
-$(document).on('click', '.search-history-btn', function () {
-    let searchCity = $('.search-history-btn').val()
-    console.log(searchCity)
-})
 
-$('#search-button').on('click', function (e) {
-    e.preventDefault()
-    let search = $('#search-input').val()
-    $('#today').attr('class', 'mt-3')
 
-    fetchWeather(search)
-    searchHistory()
-})
