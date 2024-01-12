@@ -22,8 +22,27 @@ function fetchWeather(search) {
                 })
                 .then(function (data) {
                     console.log(data);
-                    // const currentWeather = data.list[0]
+                    const currentWeather = data.list
                     displayCurrentWeather(data.list[0])
+
+                    let fiveDayForecast = currentWeather.filter(function(data) {
+                        return data.dt_txt.includes('12:00:00')
+                    })
+                    console.log(`Five day forecast: ${fiveDayForecast}`)
+                    
+
+//     for (let i = 0; i < futureForecast.length; i++) {
+//         let day = futureForecast[i];
+//         let forecastCard = $('<div>')
+//         forecastCard.attr('class', 'card col-md')
+//         let forecastCardBody = $('<div>')
+//         forecastCardBody.attr('class', 'card-body')
+//         let forecastTitle = $('<h5>')
+//         forecastCardBody.attr('class', 'card-title')
+//         forecastTitle.text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
+//         let forecastTemp = $('<p>').text(`Temp: ${day.main.temp}C`)
+//         forecastCardBody.attr('class', 'card-body')
+//     }
                 })
         })
 }
