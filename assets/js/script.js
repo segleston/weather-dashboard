@@ -25,24 +25,22 @@ function fetchWeather(search) {
                     const currentWeather = data.list
                     displayCurrentWeather(data.list[0])
 
-                    let fiveDayForecast = currentWeather.filter(function(data) {
+                    let fiveDayForecast = currentWeather.filter(function (data) {
                         return data.dt_txt.includes('12:00:00')
                     })
-                    console.log(`Five day forecast: ${fiveDayForecast}`)
-                    
 
-//     for (let i = 0; i < futureForecast.length; i++) {
-//         let day = futureForecast[i];
-//         let forecastCard = $('<div>')
-//         forecastCard.attr('class', 'card col-md')
-//         let forecastCardBody = $('<div>')
-//         forecastCardBody.attr('class', 'card-body')
-//         let forecastTitle = $('<h5>')
-//         forecastCardBody.attr('class', 'card-title')
-//         forecastTitle.text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
-//         let forecastTemp = $('<p>').text(`Temp: ${day.main.temp}C`)
-//         forecastCardBody.attr('class', 'card-body')
-//     }
+                    console.log(fiveDayForecast)
+
+
+                    for (let i = 0; i < fiveDayForecast.length; i++) {
+                        let day = fiveDayForecast[i];
+
+                        let cardCol = $('<div>').attr('class', 'card col-md')
+                        let forecastCard = $('<div>').attr('class', 'card')
+                        let forecastCardBody = $('<div>').attr('class', 'card-body')
+                        let forecastTitle = $('<h5>').attr('class', 'card-title').text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
+                        let forecastTemp = $('<p>').text(`Temp: ${day.main.temp}C`).attr('class', 'card-body')
+                    }
                 })
         })
 }
