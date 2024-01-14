@@ -56,7 +56,7 @@ function displayForecast(data) {
         //creating div/h5/p/img elements for each day forecast
         let cardCol = $('<div>').attr('class', 'col-md')
         let forecastCard = $('<div>').attr('class', 'card')
-        let forecastCardBody = $('<div>').attr('class', 'card-body bg-dark-subtle')
+        let forecastCardBody = $('<div>').attr('class', 'card-body bg-dark-subtle border border-2')
         let forecastTitle = $('<h5>').attr('class', 'card-title').text(dayjs(day.dt_txt).format('DD/MM/YYYY'))
         let forecastIconURL = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png` //ICON
         let forecastIcon = $('<img>').attr('src', forecastIconURL)
@@ -113,7 +113,7 @@ $(document).ready(function () {
     updateSearchHistoryDisplay();
 });
 
-
+// function to call photo api with search location and set to application background
 function photoAPI(search) {
     const photoKey = '41816747-a2efef2557d1bb9221cc90625'
     const photoURL = `https://pixabay.com/api/?key=${photoKey}&q=${search}&image_type=photo`

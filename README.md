@@ -6,7 +6,7 @@ Weather dashboard showing the current days weather for the seached location, and
 
 ## Usage
  
-Deployed link
+[Deployed link]()
 
 - When a user searches for a city they are presented with current and future conditions for that city and that city is added to the search history
 - When a user views the current weather conditions for that city they are presented with:
