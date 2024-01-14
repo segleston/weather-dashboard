@@ -78,6 +78,13 @@ $('#search-button').on('click', function (e) {
     $('#today').attr('class', 'mt-3')
     fetchWeather(searchInput)
 })
+
+$(document).on('click', '.search-history-btn', function () {
+    const selectedCity = $(this).text()
+    fetchWeather(selectedCity)
+    $('#today').removeClass('hide')
+})
+
 // adding search history to local storage
 function addToSearchHistory(searchTerm) {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
