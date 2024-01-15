@@ -89,8 +89,12 @@ $(document).on('click', '.search-history-btn', function () {
 function addToSearchHistory(searchTerm) {
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     searchHistory.push(searchTerm);
+    if (searchHistory.length > 10){
+        searchHistory.shift()
+    }
     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
     updateSearchHistoryDisplay();
+    console.log(searchHistory)
 }
 
 
