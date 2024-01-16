@@ -76,6 +76,7 @@ $('#search-button').on('click', function (e) {
     e.preventDefault()
     const searchInput = $('#search-input').val().trim()
     $('#today').attr('class', 'mt-3')
+    $('#fiveDayText').removeClass('hide')
     fetchWeather(searchInput)
 })
 
