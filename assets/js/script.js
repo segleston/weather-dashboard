@@ -83,6 +83,7 @@ $(document).on('click', '.search-history-btn', function () {
     const selectedCity = $(this).text()
     fetchWeather(selectedCity)
     $('#today').removeClass('hide')
+    $('#fiveDayText').removeClass('hide')
 })
 
 // adding search history to local storage
