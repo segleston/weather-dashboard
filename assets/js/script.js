@@ -109,7 +109,7 @@ function updateSearchHistoryDisplay() {
     for (let i = 0; i < searchHistory.length; i++) {
         const pastSearch = searchHistory[i];
         let searchHistoryBtn = $('<button>').text(pastSearch);
-        searchHistoryBtn.addClass('search-history-btn');
+        searchHistoryBtn.addClass('search-history-btn btn btn-light mt-2');
         searchHistoryEl.append(searchHistoryBtn);
     }
 }

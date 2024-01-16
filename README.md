@@ -30,3 +30,4 @@ Weather dashboard showing the current days weather for the seached location, and
 - Class TA Chris Katz
 - [Weather API](https://www.openweathermap.org)
 - [Background Photo API](https://pixabay.com/)
+- [Jill O'Reilly](https://github.com/jilloreilly/) (Helped with styling of page)
