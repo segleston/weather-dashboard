@@ -4,7 +4,7 @@ const search = $('#search-button')
 // Function to fetch the current weather
 function fetchWeather(search) {
     // Weather API
-    let queryURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${apiKey}`
+    let queryURL = `https://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${apiKey}`
 
     fetch(queryURL)
         .then(function (response) {
@@ -16,7 +16,7 @@ function fetchWeather(search) {
             let latitude = data[0].lat
             let longitude = data[0].lon
             // current location with lat/long values
-            let forecastURl = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
+            let forecastURl = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`
             const h3El = $('#card-title').text(`Location: ${data[0].name} (${dayjs().format('MMMM D, YYYY')})`)
             // fetching data from API
             fetch(forecastURl)
