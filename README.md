@@ -24,7 +24,7 @@ Weather dashboard showing the current days weather for the seached location, and
 - When a user click on a city in the search history they are again presented with current and future conditions for that city
 
 
-![alt text](./assets/images/screencapture-file-Users-scrambled-Desktop-bootcamp-challenges-weather-weather-dashboard-index-html-2024-01-14-18_17_30.png)
+![alt text](./assets/images/screencapture-segleston-github-io-weather-dashboard-2024-01-16-15_38_12%20(1).png)
 
 ## Credits 
 - Class TA Chris Katz
