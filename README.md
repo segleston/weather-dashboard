@@ -27,7 +27,7 @@ Weather dashboard showing the current days weather for the seached location, and
 ![alt text](./assets/images/screencapture-segleston-github-io-weather-dashboard-2024-01-16-15_38_12%20(1).png)
 
 ## Credits 
-- Class TA Chris Katz
+- Class TA Chris Kratz
 - [Weather API](https://www.openweathermap.org)
 - [Background Photo API](https://pixabay.com/)
 - [Jill O'Reilly](https://github.com/jilloreilly/) (Helped with styling of page)
